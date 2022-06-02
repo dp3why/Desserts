@@ -9,7 +9,7 @@ const SmImg = ({info}) => {
     
     return (
     <div className='w-screen top-[-70px] px-3 my-8 flex 
-    flex-wrap justify-start '>
+    flex-wrap justify-center '>
        {info.map((item) => (
         <div className='flex m-5 cursor-pointer' key={item.id} 
         onClick={() => router.push(`/movie/${item.id}`)}>

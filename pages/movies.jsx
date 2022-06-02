@@ -29,7 +29,7 @@ const movies = ({ popularMovies,
           after:z-[-1]'>
           
             <MovieBanner results={actionMovies.slice(0, 5)} />
-            <SmImg info = {actionMovies.slice(5, 11)}/>
+            <SmImg info = {actionMovies.slice(5, 15)}/>
           </main>
          
 

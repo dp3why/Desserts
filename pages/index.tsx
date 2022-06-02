@@ -8,6 +8,7 @@ import Brands from '../components/Brands'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
 
+
 const Home: NextPage = ({ popularMovies, 
   popularShows, 
   top_ratedMovies, 
