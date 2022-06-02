@@ -47,10 +47,10 @@ export async function getServerSideProps(context) {
     popularShowsRes, 
     actionMRes, 
     romanceMRes] = await Promise.all([
-      fetch(`${base_url}/discover/tv?api_key=${process.env.TMDB_API_KEY}&with_networks=213&sort_by=popularity.desc`),
-      fetch(`${base_url}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`),
-      fetch(`${base_url}/discover/movie?api_key=${process.env.TMDB_API_KEY}&with_genres=28`),
-      fetch(`${base_url}/discover/movie?api_key=${process.env.TMDB_API_KEY}&with_genres=10749`),
+      fetch(`${base_url}/discover/tv?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&with_networks=213&sort_by=popularity.desc`),
+      fetch(`${base_url}/tv/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`),
+      fetch(`${base_url}/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&with_genres=28`),
+      fetch(`${base_url}/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&with_genres=10749`),
     ]);
   const [netflixShows, 
     popularShows, 

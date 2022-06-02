@@ -20,11 +20,11 @@ const Show = ({ result }) => {
     );
     const router = useRouter();
     
-    useEffect(() => {
-      if (!session) {
-          router.push('/')
-      }
-    }, [])
+    // useEffect(() => {
+    //   if (!session) {
+    //       router.push('/')
+    //   }
+    // }, [])
 
     
 
@@ -169,7 +169,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
     const  { id }  = context.query;
     const request = await fetch(
-        `${base}${id}?api_key=${process.env.TMDB_API_KEY}&language=en-US&append_to_response=videos`
+        `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`
     ).then((response) => response.json());
     return(
        {  props: {

@@ -89,7 +89,7 @@ export default Search
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  const apiKey = process.env.TMDB_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   return {
     props:{
