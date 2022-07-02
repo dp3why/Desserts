@@ -8,8 +8,9 @@ import { PlusIcon, XIcon, HeartIcon, ThumbUpIcon, GlobeAltIcon } from '@heroicon
 import moment from 'moment';
 import ReactPlayer from 'react-player'
 import {useRouter} from 'next/router'
+import SmImg from '../../components/SmImg'
 
-const Movie = ({ result }) => {
+const Movie = ({ recommendations, result }) => {
     const { data:session } = useSession();
     const BASE_URL = 'https://image.tmdb.org/t/p/original/';
     const [showPlayer, setShowPlayer] = useState(false);
@@ -19,11 +20,11 @@ const Movie = ({ result }) => {
     );
     const router = useRouter();
     
-    // useEffect(() => {
-    //   if (!session) {
-    //       router.push('/')
-    //   }
-    // }, [])
+    useEffect(() => {
+      if (!session) {
+          router.push('/')
+      }
+    }, [])
     
     
     console.log(result)
@@ -34,7 +35,7 @@ const Movie = ({ result }) => {
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
-        {(!session) ? (<Hero/>) :(
+       
             <section className='relative z-50'>
                 {/* === background === */}
                 <div className='relative min-h-[calc(100vh-72px)]'>
@@ -141,8 +142,17 @@ const Movie = ({ result }) => {
                         />
                     </div>
                 </div>
-            </section>
-        )}
+        </section>
+        <div className='m-5 p-3 w-screen '>
+            <h1 className='uppercase mt-6 p-3 
+            text-2xl md:text-3xl lg:text-5xl'>
+                Recommendations
+            </h1>
+        </div>
+        
+        <div>
+            <SmImg info={recommendations}/>
+        </div>
 
   
     </div>
@@ -156,13 +166,24 @@ const base = 'https://api.themoviedb.org/3/movie/'
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     const  { id }  = context.query;
-    const request = await fetch(
-        `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`
-    ).then((response) => response.json());
+    // const request = await fetch(
+    //     `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`
+    // ).then((response) => response.json());
+
+    const [recommendationsRes, detailRes] = await Promise.all([
+        fetch(`${base}${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`),
+        fetch( `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`),
+      ]);
+    const [recommendations, detail] = await Promise.all([
+          recommendationsRes.json(),
+          detailRes.json(),
+      ]);        
+
     return(
        {  props: {
         session,
-        result: request,
+        result: detail,
+        recommendations: recommendations.results
         }}
     )
 }

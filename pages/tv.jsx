@@ -30,7 +30,7 @@ const TV = ({ netflixShows,
           after:z-[-1]'>
           
           <ShowBanner results={netflixShows.slice(0, 5)} />
-          <ShowImg info = {netflixShows.slice(5, 11)}/>
+          <ShowImg info = {netflixShows.slice(5, 15)}/>
       </main>
 
     </div>

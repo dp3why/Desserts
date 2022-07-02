@@ -11,11 +11,12 @@ const SmImg = ({info}) => {
     <div className='w-screen top-[-70px] px-3 my-8 flex 
     flex-wrap justify-center '>
        {info.map((item) => (
-        <div className='flex m-5 cursor-pointer' key={item.id} 
+        <div className='flex flex-col m-5 cursor-pointer items-center' key={item.id} 
         onClick={() => router.push(`/movie/${item.id}`)}>
-            <img src={`${BASE_URL}${item.poster_path}` } 
+            <Image src={`${BASE_URL}${item.poster_path}` } 
             width={330} height={500} alt='poster'
             />
+            <h2 className='flex '>{item.title || item.name}</h2>
         </div>
     )
         )}
