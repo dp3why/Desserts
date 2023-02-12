@@ -1,5 +1,7 @@
-# Hooray
-## An app for Movies and TV shows
+# NEFLE
+
+## An interactive movie recommendation app
+
 - Next.js + Tailwind CSS
 - TMDB API
-- NextAuth
+- Firebase
