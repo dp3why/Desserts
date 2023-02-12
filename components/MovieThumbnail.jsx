@@ -2,34 +2,38 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-const MovieThumbnail = ({result}) => {
-
-    const BASE_URL = 'https://image.tmdb.org/t/p/original/';
-    const router = useRouter(); 
+const MovieThumbnail = ({ result }) => {
+  const BASE_URL = 'https://image.tmdb.org/t/p/original/'
+  const router = useRouter()
 
   return (
     <div>
-    <div className='flex
-    min-w-[250px] 
+      <div
+        className="rouned-lg
+    flex 
     min-h-[170px] 
-    md:min-w-[330px] 
-    md:min-h-[210px]
-    rouned-lg overflow-hidden shadow-xl 
-    cursor-pointer border-[3px]
-     border-[#f9f9f9] border-opacity-10 
-    hover:border-opacity-80 
-    hover:shadow-2xl transform
-    hover:scale-105 transition duration-300'
-     onClick={() => router.push(`/movie/${result.id}`)}
-     >
-        <Image src={
-            `${BASE_URL}${result.backdrop_path || result.poster_path}` || 
+    min-w-[250px] 
+    transform
+    cursor-pointer overflow-hidden
+    border-opacity-10 shadow-xl
+     transition duration-300 
+    hover:scale-105 
+    hover:shadow-2xl md:min-h-[210px] md:min-w-[330px]"
+        onClick={() => router.push(`/movie/${result.id}`)}
+      >
+        <Image
+          src={
+            `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
             `${BASE_URL}${result.poster_path}`
-        } width={330} height={210} objectFit='cover' 
-        className='rounded-lg' alt=''/>
-       
-    </div>
-    <h2 className='text-center text-lg'>{result.title}</h2>
+          }
+          width={330}
+          height={210}
+          style={{ objectFit: 'cover' }}
+          className="rounded-lg"
+          alt=""
+        />
+      </div>
+      <h2 className="text-center text-lg">{result.title}</h2>
     </div>
   )
 }

@@ -1,9 +1,6 @@
-// import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
-import { getSession, useSession } from 'next-auth/react'
 import Hero from '../components/Hero'
-import Slider from '../components/Slider'
 import Brands from '../components/Brands'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
@@ -14,25 +11,17 @@ const Home = ({
   top_ratedMovies,
   top_ratedShows,
 }) => {
-  const { data: session } = useSession()
-  console.log(session)
-
   return (
     <div>
       <Head>
-        <title>Hooray | Home</title>
+        <title>NEFLE | Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      {/* 
-      not loggin, Hero. 
-      login, slider
-      */}
-      {!session ? (
-        <Hero info={popularMovies.slice(0, 5)} />
-      ) : (
-        <main
-          className="relative min-h-screen 
+      <Hero info={popularMovies.slice(6)} />
+
+      <main
+        className="relative min-h-screen 
           after:absolute 
           after:inset-0 
           after:z-[-1] 
@@ -41,26 +30,22 @@ const Home = ({
           after:bg-fixed 
           after:bg-center 
           after:bg-no-repeat"
-        >
-          <Slider info={popularMovies.slice(0, 5)} />
-          <Brands />
-          <MoviesCollection results={popularMovies} title="Popular Movies" />
-          <ShowsCollection results={popularShows} title="Popular Shows" />
-          <MoviesCollection
-            results={top_ratedMovies}
-            title="Top Rated Movies"
-          />
-          <ShowsCollection results={top_ratedShows} title="Top Rated Shows" />
-        </main>
-      )}
+      >
+        <Brands />
+        <MoviesCollection results={popularMovies} title="Popular Movies" />
+        <ShowsCollection results={popularShows} title="Popular Shows" />
+        <MoviesCollection results={top_ratedMovies} title="Top Rated Movies" />
+        <ShowsCollection results={top_ratedShows} title="Top Rated Shows" />
+      </main>
+
       <footer
         className="inset-x-1
-             bottom-1 bg-gray-900 p-5
+            bg-gray-800 p-5
              text-center
              text-lg
              text-white"
       >
-        <p>Hooray@2022 All Rights Reserved.</p>
+        <p className="font-bold">NEFLE@2023 All Rights Reserved.</p>
       </footer>
     </div>
   )
@@ -69,7 +54,6 @@ const Home = ({
 export default Home
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
   const [
     popularMoviesRes,
     popularShowsRes,
@@ -89,6 +73,7 @@ export async function getServerSideProps(context) {
       `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
     ),
   ])
+
   const [popularMovies, popularShows, top_ratedMovies, top_ratedShows] =
     await Promise.all([
       popularMoviesRes.json(),
@@ -98,7 +83,6 @@ export async function getServerSideProps(context) {
     ])
   return {
     props: {
-      session,
       popularMovies: popularMovies.results,
       popularShows: popularShows.results,
       top_ratedMovies: top_ratedMovies.results,

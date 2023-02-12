@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
-import { getSession, useSession } from 'next-auth/react'
-import Hero from '../../components/Hero'
 import Image from 'next/image'
 import {
   PlusIcon,
@@ -13,11 +11,10 @@ import {
 } from '@heroicons/react/solid'
 import moment from 'moment'
 import ReactPlayer from 'react-player'
-import { useRouter } from 'next/router'
+
 import ShowImg from '../../components/ShowImg'
 
 const Show = ({ recommendations, result }) => {
-  const { data: session } = useSession()
   const BASE_URL = 'https://image.tmdb.org/t/p/original/'
   const [showPlayer, setShowPlayer] = useState(false)
 
@@ -27,14 +24,6 @@ const Show = ({ recommendations, result }) => {
       element.type === 'Clip' ||
       element.type === 'Teaser'
   )
-  const router = useRouter()
-
-  console.log(recommendations)
-  //   useEffect(() => {
-  //     if (!session) {
-  //       router.push('/')
-  //     }
-  //   }, [session])
 
   return (
     <div>
@@ -53,8 +42,8 @@ const Show = ({ recommendations, result }) => {
               `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
               `${BASE_URL}${result.poster_path}`
             }
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
           />
         </div>
 
@@ -95,9 +84,9 @@ const Show = ({ recommendations, result }) => {
                 Trailer
               </span>
             </button>
-            {/* 
-                        ==== END trailer button ===
-                        */}
+
+            {/* === END trailer button ===    */}
+
             <div
               className="rounded=full flex h-11 w-11 cursor-pointer items-center
                         justify-center border-2 border-white bg-black/60"
@@ -134,20 +123,22 @@ const Show = ({ recommendations, result }) => {
             </h4>
           </div>
 
-          <h2 className=" max-w-2xl">
+          <span className=" max-w-2xl ">
             {result.seasons.map((season) => (
               <button
                 key={season.id}
-                className="my-1 rounded-full 
-                            bg-blue-700  py-2
+                className="my-1 mx-1 
+                            rounded-xl  bg-blue-700 py-1
                              px-4 text-white hover:bg-blue-500"
               >
                 {` ${season.name} `}
               </button>
             ))}
-          </h2>
+          </span>
 
-          <p className="max-w-4xl text-sm md:text-lg">{result.overview}</p>
+          <p className="max-w-4xl text-sm md:text-lg">
+            {result.overview ? result.overview : ''}
+          </p>
         </div>
 
         {/* == bg overlay == */}
@@ -196,10 +187,10 @@ const Show = ({ recommendations, result }) => {
       </section>
       <div className="m-5 w-screen p-3 ">
         <h1
-          className="mt-6 p-3 text-2xl 
-            uppercase md:text-3xl lg:text-5xl"
+          className="mt-6 ml-3 p-3 text-2xl 
+          font-bold "
         >
-          Recommendations
+          You May also like:
         </h1>
       </div>
 
@@ -215,7 +206,6 @@ export default Show
 const base = 'https://api.themoviedb.org/3/tv/'
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
   const { id } = context.query
 
   const [recommendationsRes, detailRes] = await Promise.all([
@@ -233,7 +223,6 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      session,
       result: detail,
       recommendations: recommendations.results,
     },

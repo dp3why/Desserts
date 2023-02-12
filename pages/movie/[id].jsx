@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
-import { getSession, useSession } from 'next-auth/react'
-import Hero from '../../components/Hero'
 import Image from 'next/image'
 import {
   PlusIcon,
@@ -17,7 +15,6 @@ import { useRouter } from 'next/router'
 import SmImg from '../../components/SmImg'
 
 const Movie = ({ recommendations, result }) => {
-  const { data: session } = useSession()
   const BASE_URL = 'https://image.tmdb.org/t/p/original/'
   const [showPlayer, setShowPlayer] = useState(false)
 
@@ -26,13 +23,6 @@ const Movie = ({ recommendations, result }) => {
   )
   const router = useRouter()
 
-  //   useEffect(() => {
-  //     if (!session) {
-  //       router.push('/')
-  //     }
-  //   }, [session])
-
-  console.log(result)
   return (
     <div>
       <Head>
@@ -49,8 +39,8 @@ const Movie = ({ recommendations, result }) => {
               `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
               `${BASE_URL}${result.poster_path}`
             }
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             alt=""
           />
         </div>
@@ -180,10 +170,10 @@ const Movie = ({ recommendations, result }) => {
       </section>
       <div className="m-5 w-screen p-3 ">
         <h1
-          className="mt-6 p-3 text-2xl 
-            uppercase md:text-3xl lg:text-5xl"
+          className="mt-6 ml-3 p-3 text-2xl 
+             font-bold "
         >
-          Recommendations
+          You May also like:
         </h1>
       </div>
 
@@ -199,7 +189,6 @@ export default Movie
 const base = 'https://api.themoviedb.org/3/movie/'
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
   const { id } = context.query
   // const request = await fetch(
   //     `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`
@@ -220,7 +209,6 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      session,
       result: detail,
       recommendations: recommendations.results,
     },
