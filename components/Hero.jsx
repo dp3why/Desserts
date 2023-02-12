@@ -8,7 +8,7 @@ import { Link as Scroll } from 'react-scroll'
 import { useRouter } from 'next/router'
 
 const BASE_URL = 'https://image.tmdb.org/t/p/original'
-
+const BASE_URL_SM = 'https://image.tmdb.org/t/p/w500'
 const Hero = ({ info }) => {
   const router = useRouter()
 
@@ -56,7 +56,7 @@ const Hero = ({ info }) => {
                 <Image
                   className="z-30 mt-3 rounded-xl drop-shadow-xl	"
                   loading="lazy"
-                  src={`${BASE_URL}${item.poster_path}`}
+                  src={`${BASE_URL_SM}${item.poster_path}`}
                   alt={item.title}
                   fill
                   sizes="1"

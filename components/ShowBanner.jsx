@@ -9,6 +9,7 @@ import { HeartIcon, PlusIcon, ThumbUpIcon } from '@heroicons/react/solid'
 import { Router, useRouter } from 'next/router'
 
 const BASE_URL = 'https://image.tmdb.org/t/p/original'
+const BASE_URL_SM = 'https://image.tmdb.org/t/p/w500'
 
 const ShowBanner = ({ results }) => {
   const router = useRouter()
@@ -48,7 +49,7 @@ const ShowBanner = ({ results }) => {
                   loading="lazy"
                   width={300}
                   height={400}
-                  src={`${BASE_URL}${item.poster_path}`}
+                  src={`${BASE_URL_SM}${item.poster_path}`}
                   alt={item.title}
                 />
               </div>
