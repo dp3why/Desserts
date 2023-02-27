@@ -26,7 +26,7 @@
 
 ### Thumbnails Page
 
-- ![Thumbnails](/images/ss2.png)
+![Thumbnails](/images/ss2.png)
 
 ### Search Page
 
