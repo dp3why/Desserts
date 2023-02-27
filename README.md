@@ -1,10 +1,16 @@
 # NEFLE
 
+[https://nefle.vercel.app](https://nefle.vercel.app)
+
 ## An interactive movie recommendation app
 
 - Next.js + Tailwind CSS
 - TMDB API
 - Firebase
+
+## Hero Page
+
+![Hero Page](/images/ss1.png)
 
 ## Introduction
 
@@ -17,3 +23,15 @@
 - Set up user authentication and authorization with Firebase;
 
 - Deployed the app on the Vercel platform.
+
+### Thumbnails Page
+
+- ![Thumbnails](/images/ss2.png)
+
+### Search Page
+
+![Search Page](/images/ss3.png)
+
+### Detail Page
+
+![Detail Page](/images/ss4.png)
