@@ -5,8 +5,8 @@ import { getStorage } from 'firebase/storage'
 const firebaseConfig = {
   apiKey: `${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
   authDomain: `${process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}`,
-  projectId: 'hoorayapp-0001',
-  storageBucket: 'hoorayapp-0001.appspot.com',
+  projectId: 'nefle-1',
+  storageBucket: 'nefle-1.appspot.com',
   messagingSenderId: `${process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}`,
   appId: `${process.env.NEXT_PUBLIC_FIREBASE_API_ID}`,
 }
