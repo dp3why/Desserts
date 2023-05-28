@@ -1,26 +1,24 @@
 import Image from 'next/image'
-// import Head from 'next/head'
-import React from 'react'
+import React, { useContext } from 'react'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { FaAngleDoubleDown } from 'react-icons/fa'
 import { Link as Scroll } from 'react-scroll'
 import { useRouter } from 'next/router'
+import { AppContext } from '../pages/index'
 
 const BASE_URL = 'https://image.tmdb.org/t/p/original'
 const BASE_URL_SM = 'https://image.tmdb.org/t/p/w500'
+
 const Hero = ({ info }) => {
   const router = useRouter()
+  const { darkMode } = useContext(AppContext)
 
   return (
     <section>
-      {/* <Head>
-        <title> NEFLE </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
       {/* ========= Part 1 ========= */}
       <Carousel
-        className="z-20 h-[calc(100vh-65px)] "
+        className=" h-[calc(100vh-65px)] "
         autoPlay
         infiniteLoop
         showStatus={false}
@@ -65,7 +63,7 @@ const Hero = ({ info }) => {
 
               <div
                 className=" absolute bottom-[4rem] left-1/2 right-1/2 flex h-[3rem] w-[3rem] animate-bounce items-center justify-center
-             rounded-full bg-white/30 text-3xl backdrop-blur "
+             rounded-full text-3xl backdrop-blur dark:bg-white/30 "
               >
                 <Scroll to="intropage" smooth={true}>
                   <FaAngleDoubleDown
@@ -84,28 +82,35 @@ const Hero = ({ info }) => {
         ))}
       </Carousel>
       {/* ======== Part 2========== */}
-      <div className="relative  z-0 flex h-[calc(100vh-10px)] flex-col items-center justify-center">
+      <div className={`hero-part2 ${darkMode ? 'dark' : 'light'}`}>
         <div className="flex flex-col items-center justify-center">
-          {' '}
+          <Image
+            src="/images/logonew3.png"
+            className="mx-1 rounded-full"
+            width={150}
+            height={150}
+            alt="logo"
+          />
+
           <h1
             className="	mt-[3rem]  bg-gradient-to-r from-pink-500 
             to-violet-500 bg-clip-text text-5xl font-extrabold text-yellow-400
             text-transparent "
             id="intropage"
           >
-            NO IDEA
+            DESSERTS
           </h1>
           <h3
-            className=" mt-1 text-center
-            text-xl font-bold"
+            className=" mt-1 text-center text-xl
+            font-bold text-black dark:text-white"
           >
-            What to watch tonight?
+            Watch a Movie For tonight?
           </h3>
           <h2
             className="h-100% text-drop-shadow mt-[2rem] text-center 
             text-2xl text-violet-300 drop-shadow-lg"
           >
-            Ask NEFLE for help!
+            Sure thing !
           </h2>
         </div>
 

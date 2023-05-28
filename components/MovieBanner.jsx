@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel'
 // import {Link as Scroll} from 'react-scroll'
 import moment from 'moment'
 import {
-  GlobeAltIcon,
+  // GlobeAltIcon,
   HeartIcon,
   PlusIcon,
   ThumbUpIcon,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { SearchIcon } from '@heroicons/react/outline'
@@ -39,7 +39,7 @@ const Search = ({
   return (
     <div>
       <Head>
-        <title>Search</title>
+        <title>DESSERTS | Search</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />

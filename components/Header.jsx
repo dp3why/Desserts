@@ -1,44 +1,55 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import {
   HomeIcon,
   SearchIcon,
-  PlusIcon,
   StarIcon,
+  MoonIcon,
 } from '@heroicons/react/solid'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router'
 import { getAuth } from 'firebase/auth'
 import { initFirebase } from '../firebase'
+import { AppContext } from '../pages/index'
 
 initFirebase()
 
 const Header = () => {
   const router = useRouter()
 
+  const { darkMode, setDarkMode } = useContext(AppContext)
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+    console.log(darkMode)
+  }
+
   const auth = getAuth()
   const [user, loading] = useAuthState(auth)
-
+  const handleSignOut = () => {
+    localStorage.removeItem('accessToken')
+    auth.signOut()
+  }
   return (
     <div
-      className=" sticky top-0
+      className={`sticky top-0
     z-[1000] flex h-[72px]
-    items-center justify-between  bg-gradient-to-b from-black to-[rgb(0,0,0,0.3)]
-    px-10 md:px-12
-    "
+    items-center justify-between bg-[rgba(221,96,10,0.7)]
+    px-10 dark:bg-gradient-to-b dark:from-black dark:to-[rgb(0,0,0,0.3)] md:px-12
+     ${darkMode ? 'dark' : ''}`}
     >
       <div
         className="flex cursor-pointer flex-row items-center justify-center gap-0"
         onClick={() => router.push('/')}
       >
         <Image
-          src="/images/logonew.png"
+          src="/images/logonew3.png"
           className="mx-1 rounded-full"
           width={40}
           height={40}
           alt="logo"
         />
-        <h1 className="mx-1 text-lg font-bold">NEFLE</h1>
+        <h1 className="mx-1 text-lg font-bold">DESSERTS</h1>
       </div>
       <div className="ml-10 items-center space-x-6 md:flex">
         <a className="header-link group">
@@ -81,10 +92,14 @@ const Header = () => {
           <></>
         )}
       </div>
-      <div className=" flex flex-row justify-end">
+      <div className=" flex flex-row items-center justify-end">
+        <MoonIcon
+          className="header-icon mr-3 h-5 cursor-pointer"
+          onClick={toggleDarkMode}
+        />
         {!user ? (
           <button
-            className="ml-auto rounded-md border px-4 py-1.5 font-medium uppercase tracking-wide
+            className="ml-auto rounded-md border px-2 py-1 font-medium uppercase tracking-wide
       transition duration-200 hover:bg-white hover:text-black"
             onClick={() => router.push('/signin')}
           >
@@ -96,7 +111,6 @@ const Header = () => {
               className=" h-8 w-8
           cursor-pointer rounded-full bg-green-600 object-cover"
             >
-              {' '}
               {user.displayName[0]}
             </button>
 
@@ -106,7 +120,7 @@ const Header = () => {
            uppercase 
           tracking-wide
         transition duration-200 hover:bg-white hover:text-black"
-              onClick={() => auth.signOut()}
+              onClick={() => handleSignOut()}
             >
               Logout
             </button>

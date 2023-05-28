@@ -4,6 +4,11 @@ import Hero from '../components/Hero'
 import Brands from '../components/Brands'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
+import React, { useState } from 'react'
+
+export const AppContext = React.createContext({
+  darkMode: false,
+})
 
 const Home = ({
   popularMovies,
@@ -11,10 +16,12 @@ const Home = ({
   top_ratedMovies,
   top_ratedShows,
 }) => {
+  const [darkMode, setDarkMode] = useState(false)
+
   return (
-    <div>
+    <AppContext.Provider value={{ darkMode, setDarkMode }}>
       <Head>
-        <title>NEFLE | Home</title>
+        <title>DESSERTS | Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
@@ -45,9 +52,9 @@ const Home = ({
              text-lg
              text-white"
       >
-        <p className="font-bold">NEFLE@2023 All Rights Reserved.</p>
+        <p className="font-bold">DESSERTS@2023 All Rights Reserved.</p>
       </footer>
-    </div>
+    </AppContext.Provider>
   )
 }
 

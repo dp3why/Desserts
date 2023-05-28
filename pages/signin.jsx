@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Image from 'next/image'
-
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import {
   getAuth,
@@ -10,6 +10,8 @@ import {
 } from 'firebase/auth'
 import { initFirebase } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
+
+const BACK = process.env.NEXT_PUBLIC_BACKEND_URL
 
 export default function SignIn({}) {
   initFirebase()
@@ -26,24 +28,36 @@ export default function SignIn({}) {
     router.push('/')
   }
 
-  const signInGo = async () => {
-    const provider = new GoogleAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    console.log(result.user)
-    if (user) {
-      router.push('/')
+  const handleSignIn = async (provider) => {
+    try {
+      const result = await signInWithPopup(auth, provider)
+      const idToken = await result.user.getIdToken()
+
+      const response = await fetch(`${BACK}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idToken: idToken }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+
+        // Retrieve the JWT access token from the response
+        const accessToken = data.access_token
+
+        // Save the JWT access token in local storage or wherever needed
+        localStorage.setItem('accessToken', accessToken)
+
+        router.push('/')
+      } else {
+        throw new Error('Failed to sign in')
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
-
-  const signInGit = async () => {
-    const provider = new GithubAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    console.log(result.user)
-    if (user) {
-      router.push('/')
-    }
-  }
-
   return (
     <div
       className="relative flex h-screen w-screen items-center
@@ -69,7 +83,10 @@ export default function SignIn({}) {
         <h1 className="case m-6 text-lg font-semibold ">Let's get started</h1>
 
         <div className="btn my-4 flex flex-col bg-gray-600 p-3">
-          <button className=" flex w-full px-2 py-1" onClick={signInGo}>
+          <button
+            className=" flex w-full px-2 py-1"
+            onClick={() => handleSignIn(new GoogleAuthProvider())}
+          >
             <img
               src="/images/google.png"
               alt=""
@@ -80,7 +97,10 @@ export default function SignIn({}) {
           </button>
         </div>
         <div className="btn m-1 flex flex-col bg-gray-600 p-3">
-          <button className="flex w-full px-2 py-1" onClick={signInGit}>
+          <button
+            className="flex w-full px-2 py-1"
+            onClick={() => handleSignIn(new GithubAuthProvider())}
+          >
             <img
               src="/images/github.png"
               alt=""

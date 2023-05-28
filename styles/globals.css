@@ -2,43 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
-    body {
-        @apply bg-[#040714] text-[#f9f9f9] scrollbar-hide;
-    }
+  body {
+    @apply text-[#f9f9f9] scrollbar-hide;
+  }
 }
 
-@layer components { 
-    .logotext {
-        @apply uppercase text-lg;
-    }
-    .header-link {
-        @apply flex items-center space-x-2 cursor-pointer;
-    }
-    .header-icon {
-        @apply hidden md:flex lg:flex;
-    }
-    .header-text {
-        @apply  hidden lg:flex;
-    }
-    .span {
-        @apply relative uppercase text-sm font-medium before:bg-[#f9f9f9] before:rounded-bl before:-bottom-1.5 before:h-0.5 before:inset-x-0 before:absolute before:transform before:origin-left before:scale-x-0 before:transition-all before:duration-200 group-hover:before:scale-x-100;
-    }
-    
-    .brand {
-        @apply flex relative w-52 h-32 sm:w-64 sm:h-36 border-[3px] border-[#f9f9f9] border-opacity-10 rounded-lg cursor-pointer shadow-xl overflow-hidden  hover:border-opacity-80 hover:shadow-2xl transform hover:scale-105 transition duration-300;
-    }
+@layer components {
+  .logotext {
+    @apply text-lg uppercase;
+  }
+  .header-link {
+    @apply flex cursor-pointer items-center space-x-2;
+  }
+  .header-icon {
+    @apply hidden md:flex lg:flex;
+  }
+  .header-text {
+    @apply hidden lg:flex;
+  }
+  .span {
+    @apply relative text-sm font-medium uppercase before:absolute before:inset-x-0 before:-bottom-1.5 before:h-0.5 before:origin-left before:scale-x-0 before:transform before:rounded-bl before:bg-[#f9f9f9] before:transition-all before:duration-200 group-hover:before:scale-x-100;
+  }
 
-    .btn {
-        @apply bg-black p-3 
-        rounded-full ring-gray-200 text-xl text-gray-300
-       hover:text-white
-       ;
-        ;
-    }
+  .brand {
+    @apply relative flex h-32 w-52 transform cursor-pointer overflow-hidden rounded-lg border-[3px] border-[#f9f9f9] border-opacity-10 shadow-xl transition  duration-300 hover:scale-105 hover:border-opacity-80 hover:shadow-2xl sm:h-36 sm:w-64;
+  }
 
-    
+  .btn {
+    @apply rounded-full  bg-black
+         p-3 text-xl text-gray-300
+       ring-gray-200 hover:text-white;
+  }
+
+  .hero-part2.dark {
+    @apply relative z-0  flex h-[calc(100vh-10px)] flex-col 
+    items-center justify-center bg-[#040714];
+  }
+  .hero-part2.light {
+    @apply relative z-0  flex h-[calc(100vh-10px)] flex-col 
+    items-center justify-center bg-white;
+  }
 }
