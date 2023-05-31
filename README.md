@@ -1,13 +1,13 @@
 # DESSERTS
 
-[https://nefle.vercel.app](https://nefle.vercel.app)
+[https://dessertai.vercel.app/](https://dessertai.vercel.app/)
 
-## An AI powered movie recommendation app
+## An interactive movie recommendation app
 
 - Next.js + Tailwind CSS
 - TMDB API
 - Firebase
-- Flask
+- Flask REST API on backend
 
 ## Hero Page
 

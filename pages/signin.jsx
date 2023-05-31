@@ -74,7 +74,7 @@ export default function SignIn({}) {
       w-full flex-col items-center justify-center"
       >
         <Image
-          src="/images/logonew.png"
+          src="/images/logonew3.png"
           className="rounded-full"
           width={80}
           height={80}
