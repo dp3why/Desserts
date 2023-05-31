@@ -5,12 +5,16 @@ import {
   SearchIcon,
   StarIcon,
   MoonIcon,
+  FilmIcon,
+  DesktopComputerIcon,
+  // UserIcon,
+  MenuIcon,
 } from '@heroicons/react/solid'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/router'
 import { getAuth } from 'firebase/auth'
 import { initFirebase } from '../firebase'
-import { AppContext } from '../pages/index'
+import { AppContext } from '../pages/_app'
 
 initFirebase()
 
@@ -21,7 +25,6 @@ const Header = () => {
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
-    console.log(darkMode)
   }
 
   const auth = getAuth()
@@ -67,20 +70,13 @@ const Header = () => {
         </a>
 
         <a className="header-link group" onClick={() => router.push('/movies')}>
-          <img
-            src="/images/movie-icon.svg"
-            alt=""
-            className="header-icon h-5"
-          />
+          <FilmIcon className="header-icon h-4" />
+
           <span className="span header-text">Movies</span>
         </a>
         <a className="header-link group" onClick={() => router.push('/tv')}>
-          <img
-            src="/images/series-icon.svg"
-            alt=""
-            className="header-icon h-5"
-          />
-          <span className="span header-text">TV Shows</span>
+          <DesktopComputerIcon className="header-icon h-4" />
+          <span className="span header-text">Shows</span>
         </a>
         {/* ======== Header links after login */}
         {user ? (
@@ -92,9 +88,9 @@ const Header = () => {
           <></>
         )}
       </div>
-      <div className=" flex flex-row items-center justify-end">
+      <div className="ml-3 flex items-center justify-end">
         <MoonIcon
-          className="header-icon mr-3 h-5 cursor-pointer"
+          className="header-icon mx-1 block h-6 w-6 cursor-pointer"
           onClick={toggleDarkMode}
         />
         {!user ? (
@@ -106,7 +102,7 @@ const Header = () => {
             Login
           </button>
         ) : (
-          <div className="mr-1 ml-20 flex w-full items-center justify-end">
+          <div className=" flex items-center  justify-end gap-2">
             <button
               className=" h-8 w-8
           cursor-pointer rounded-full bg-green-600 object-cover"
@@ -115,17 +111,19 @@ const Header = () => {
             </button>
 
             {/* <h2 className='hidden md:flex'>{session.user.name} </h2> */}
+
             <button
-              className="ml-2 rounded border px-2 py-1 
-           uppercase 
-          tracking-wide
-        transition duration-200 hover:bg-white hover:text-black"
+              className="ml-2 hidden rounded border px-2 
+           py-1 text-sm
+          uppercase tracking-wide transition
+        duration-200 hover:bg-white hover:text-black sm:block"
               onClick={() => handleSignOut()}
             >
               Logout
             </button>
           </div>
         )}
+        <MenuIcon className="mx-1 block w-8 md:hidden" />
       </div>
     </div>
   )

@@ -32,9 +32,9 @@
   }
 
   .btn {
-    @apply rounded-full  bg-black
-         p-3 text-xl text-gray-300
-       ring-gray-200 hover:text-white;
+    @apply rounded-full  bg-orange-500 px-4
+         py-1 text-lg text-gray-200 ring-gray-200
+       hover:text-white;
   }
 
   .hero-part2.dark {
@@ -44,5 +44,20 @@
   .hero-part2.light {
     @apply relative z-0  flex h-[calc(100vh-10px)] flex-col 
     items-center justify-center bg-white;
+  }
+  .aboutSection.light {
+    @apply flex h-screen w-screen flex-wrap items-start
+    justify-center gap-6 p-5;
+  }
+  .aboutSection.dark {
+    @apply flex  w-screen flex-wrap items-start
+    justify-center gap-6 bg-neutral-700 p-5 text-white;
+  }
+
+  .searchpage.light {
+    @apply bg-white;
+  }
+  .searchpage.dark {
+    @apply bg-neutral-700;
   }
 }

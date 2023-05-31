@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
 import Image from 'next/image'
@@ -13,6 +13,7 @@ import moment from 'moment'
 import ReactPlayer from 'react-player'
 import { useRouter } from 'next/router'
 import SmImg from '../../components/SmImg'
+import { AppContext } from '../../pages/_app'
 
 const Movie = ({ recommendations, result }) => {
   const BASE_URL = 'https://image.tmdb.org/t/p/original/'
@@ -22,6 +23,7 @@ const Movie = ({ recommendations, result }) => {
     (element) => element.type === 'Trailer' || element.type === 'Clip'
   )
   const router = useRouter()
+  const { darkMode } = useContext(AppContext)
 
   return (
     <div>
@@ -31,7 +33,7 @@ const Movie = ({ recommendations, result }) => {
       </Head>
       <Header />
 
-      <section className="relative z-50">
+      <section className={`searchpage ${darkMode ? 'dark' : 'light'}`}>
         {/* === background === */}
         <div className="relative min-h-[calc(100vh-72px)]">
           <Image
@@ -168,16 +170,14 @@ const Movie = ({ recommendations, result }) => {
           </div>
         </div>
       </section>
-      <div className="m-5 w-screen p-3 ">
+
+      <div className={`searchpage ${darkMode ? 'dark' : 'light'}`}>
         <h1
-          className="mt-6 ml-3 p-3 text-2xl 
-             font-bold "
+          className="ml-3 p-5 text-2xl font-bold text-black 
+             dark:text-white "
         >
           You May also like:
         </h1>
-      </div>
-
-      <div>
         <SmImg info={recommendations} />
       </div>
     </div>

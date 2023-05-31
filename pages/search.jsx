@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { SearchIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
+import { AppContext } from '../pages/_app'
 import SmImg from '../components/SmImg'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
@@ -14,6 +14,7 @@ const Search = ({
   top_ratedMovies,
   top_ratedShows,
 }) => {
+  const { darkMode } = useContext(AppContext)
   const base_url = 'https://api.themoviedb.org/3'
   const [searchResults, setSearchResults] = useState([])
   const [formInputs, setFormInputs] = useState({})
@@ -33,7 +34,6 @@ const Search = ({
     movies = await movies.json()
 
     setSearchResults(movies.results)
-    console.log(searchResults)
   }
 
   return (
@@ -44,38 +44,31 @@ const Search = ({
       </Head>
       <Header />
 
-      <section>
-        {/* <div className="relative inset-0 h-screen w-screen">
-          <Image
-            src="/images/hero-background.jpg"
-            layout="fill"
-            style={{objectFit:"cover"}}
-            alt="background-nf"
-          />
-        </div> */}
-
-        <div className=" mt-[2rem] w-screen">
+      <section className={`searchpage ${darkMode ? 'dark' : 'light'}`}>
+        <div className="">
           <form
-            className="mt-5 flex flex-grow flex-col
-            items-center"
+            className="flex flex-grow flex-col items-center pt-8
+            text-neutral-600 dark:text-white "
             action=""
             onSubmit={search}
           >
             <div
               className="lg:m-w-2xl flex w-full
               max-w-md cursor-pointer items-center
-              rounded-full border-2 px-5
+              rounded-full border-2 border-neutral-300 px-5
               py-1 shadow-gray-200 focus-within:shadow-lg 
-              hover:shadow-lg hover:ring-2 focus:outline-none active:ring-gray-400 sm:max-w-xl"
+              hover:shadow-lg hover:ring-2 focus:outline-none
+               active:ring-gray-400 sm:max-w-xl"
             >
-              <SearchIcon className="mr-3 h-8 text-gray-200" />
+              <SearchIcon className="mr-3 h-8 text-gray-400  dark:text-gray-200 " />
               <input
                 type="text"
-                className="flex-grow bg-black
-                focus:outline-none"
+                className="flex-grow text-neutral-500 focus:outline-none
+                dark:bg-neutral-700 dark:text-white"
                 name="searchTerm"
                 value={searchTerm}
                 onChange={handleInputs}
+                placeholder="Let's search for ..."
                 required
               />
               <button className="btn ">Search</button>
@@ -96,7 +89,7 @@ const Search = ({
             <></>
           )}
         </div>
-        <div>
+        <div className="text-black dark:text-white">
           <MoviesCollection results={popularMovies} title="Popular Movies" />
           <ShowsCollection results={popularShows} title="Popular Shows" />
           <MoviesCollection

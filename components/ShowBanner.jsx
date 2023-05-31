@@ -15,7 +15,7 @@ const ShowBanner = ({ results }) => {
   const router = useRouter()
   console.log(results)
   return (
-    <section className="max-w-screen-1x1 relative mt-7 shadow-2xl">
+    <section className="max-w-screen-1x1 relative shadow-2xl">
       <Carousel
         autoPlay
         infiniteLoop

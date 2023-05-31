@@ -10,8 +10,8 @@ const SmImg = ({ info }) => {
 
   return (
     <div
-      className="top-[-70px] my-8 flex w-screen flex-wrap 
-    justify-center px-3 "
+      className="  flex w-screen flex-wrap justify-center py-8 px-3
+    text-black dark:text-white "
     >
       {info.map((item) => (
         <div
@@ -21,11 +21,13 @@ const SmImg = ({ info }) => {
         >
           <Image
             src={`${BASE_URL}${item.poster_path}`}
-            width={330}
-            height={500}
+            width={350}
+            height={480}
             alt="poster"
           />
-          <h2 className="flex ">{item.title || item.name}</h2>
+          <h2 className="flex max-w-xs text-center ">
+            {item.title || item.name}
+          </h2>
           <h3 className="flex ">
             {moment(item.release_date || item.first_air_date).format('YYYY')}
           </h3>

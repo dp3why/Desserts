@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
 import Image from 'next/image'
@@ -11,7 +11,7 @@ import {
 } from '@heroicons/react/solid'
 import moment from 'moment'
 import ReactPlayer from 'react-player'
-
+import { AppContext } from '../../pages/_app'
 import ShowImg from '../../components/ShowImg'
 
 const Show = ({ recommendations, result }) => {
@@ -24,6 +24,7 @@ const Show = ({ recommendations, result }) => {
       element.type === 'Clip' ||
       element.type === 'Teaser'
   )
+  const { darkMode } = useContext(AppContext)
 
   return (
     <div>
@@ -33,7 +34,7 @@ const Show = ({ recommendations, result }) => {
       </Head>
       <Header />
 
-      <section className="relative z-50">
+      <section className={`searchpage ${darkMode ? 'dark' : 'light'}`}>
         {/* === background backdrop image === */}
 
         <div className="relative min-h-[calc(100vh-72px)]">
@@ -185,16 +186,14 @@ const Show = ({ recommendations, result }) => {
           </div>
         </div>
       </section>
-      <div className="m-5 w-screen p-3 ">
+
+      <div className={`searchpage ${darkMode ? 'dark' : 'light'}`}>
         <h1
-          className="mt-6 ml-3 p-3 text-2xl 
-          font-bold "
+          className="ml-3 p-5 text-2xl font-bold  text-black 
+          dark:text-white "
         >
           You May also like:
         </h1>
-      </div>
-
-      <div>
         <ShowImg info={recommendations} />
       </div>
     </div>

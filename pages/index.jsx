@@ -4,11 +4,7 @@ import Hero from '../components/Hero'
 import Brands from '../components/Brands'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
-import React, { useState } from 'react'
-
-export const AppContext = React.createContext({
-  darkMode: false,
-})
+import React from 'react'
 
 const Home = ({
   popularMovies,
@@ -16,10 +12,8 @@ const Home = ({
   top_ratedMovies,
   top_ratedShows,
 }) => {
-  const [darkMode, setDarkMode] = useState(false)
-
   return (
-    <AppContext.Provider value={{ darkMode, setDarkMode }}>
+    <>
       <Head>
         <title>DESSERTS | Home</title>
         <link rel="icon" href="/favicon.ico" />
@@ -38,11 +32,11 @@ const Home = ({
           after:bg-center 
           after:bg-no-repeat"
       >
-        <Brands />
         <MoviesCollection results={popularMovies} title="Popular Movies" />
         <ShowsCollection results={popularShows} title="Popular Shows" />
         <MoviesCollection results={top_ratedMovies} title="Top Rated Movies" />
         <ShowsCollection results={top_ratedShows} title="Top Rated Shows" />
+        <Brands />
       </main>
 
       <footer
@@ -54,7 +48,7 @@ const Home = ({
       >
         <p className="font-bold">DESSERTS@2023 All Rights Reserved.</p>
       </footer>
-    </AppContext.Provider>
+    </>
   )
 }
 

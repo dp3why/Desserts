@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel'
 import { FaAngleDoubleDown } from 'react-icons/fa'
 import { Link as Scroll } from 'react-scroll'
 import { useRouter } from 'next/router'
-import { AppContext } from '../pages/index'
+import { AppContext } from '../pages/_app'
 
 const BASE_URL = 'https://image.tmdb.org/t/p/original'
 const BASE_URL_SM = 'https://image.tmdb.org/t/p/w500'
@@ -28,9 +28,7 @@ const Hero = ({ info }) => {
       >
         {info.map((item) => (
           <div key={item}>
-            {/* === gray layer to darken the image === */}
-            {/* <div className="absolute inset-0 z-20 bg-gray-600 bg-opacity-30"></div> */}
-            {/* ===== bg image ====== */}
+            {/* ===== bg backdrop_path image ====== */}
             <div
               className=" mt-0 flex h-[calc(100vh-0.5rem)] w-screen "
               style={{
@@ -72,18 +70,16 @@ const Hero = ({ info }) => {
                   />
                 </Scroll>
               </div>
-              <div
-                className="z-500 absolute bottom-0 h-[3rem]  
-              w-screen bg-gradient-to-b from-[rgb(0,0,0,0.1)] to-black
-              "
-              ></div>
             </div>
           </div>
         ))}
       </Carousel>
       {/* ======== Part 2========== */}
-      <div className={`hero-part2 ${darkMode ? 'dark' : 'light'}`}>
-        <div className="flex flex-col items-center justify-center">
+      <div
+        id="intropage"
+        className={`hero-part2 ${darkMode ? 'dark' : 'light'}`}
+      >
+        <div className="flex flex-col items-center justify-center px-7">
           <Image
             src="/images/logonew3.png"
             className="mx-1 rounded-full"
@@ -93,28 +89,29 @@ const Hero = ({ info }) => {
           />
 
           <h1
-            className="	mt-[3rem]  bg-gradient-to-r from-pink-500 
-            to-violet-500 bg-clip-text text-5xl font-extrabold text-yellow-400
+            className="bg-gradient-to-r from-pink-500 to-violet-500 
+            bg-clip-text p-1 text-5xl font-extrabold
             text-transparent "
-            id="intropage"
           >
             DESSERTS
           </h1>
           <h3
-            className=" mt-1 text-center text-xl
+            className=" mt-1 text-center text-2xl
             font-bold text-black dark:text-white"
           >
-            Watch a Movie For tonight?
+            Sweet and Simple!
           </h3>
-          <h2
-            className="h-100% text-drop-shadow mt-[2rem] text-center 
-            text-2xl text-violet-300 drop-shadow-lg"
+          <h4
+            className="h-100% text-drop-shadow mt-[2rem] max-w-md text-justify
+            text-lg text-violet-600 drop-shadow-lg  dark:text-violet-300 "
           >
-            Sure thing !
-          </h2>
+            Just like your favorite sweet treats, each movie is a delicious
+            blend of storytelling, infused with flavors of joy, excitement, and
+            pure entertainment.
+          </h4>
         </div>
 
-        <div className="flex items-center justify-center"></div>
+        {/* <div className="flex items-center justify-center"></div> */}
       </div>
     </section>
   )

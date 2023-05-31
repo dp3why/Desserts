@@ -4,7 +4,7 @@ import MovieThumbnail from './MovieThumbnail'
 const MoviesCollection = ({ results, title }) => {
   return (
     <div
-      className="relative my-10 mx-auto flex
+      className="relative  mx-auto flex
     max-w-[1400px] flex-col space-y-2 px-8"
     >
       <h2 className="text-lg font-semibold uppercase">{title}</h2>

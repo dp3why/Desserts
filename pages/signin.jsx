@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import axios from 'axios'
+
 import { useRouter } from 'next/router'
 import {
   getAuth,

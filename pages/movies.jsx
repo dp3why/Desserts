@@ -14,7 +14,7 @@ const movies = ({
   return (
     <div>
       <Head>
-        <title> Moives</title>
+        <title>Desserts | Moives</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />

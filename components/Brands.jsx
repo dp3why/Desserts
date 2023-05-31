@@ -12,8 +12,8 @@ const brandslist = [
 const Brands = () => {
   return (
     <section
-      className="mx-auto mt-10 flex max-w-[1400px]
-    flex-col items-center justify-center gap-6 px-8 lg:flex-row"
+      className="mx-auto flex max-w-[1400px] flex-col
+    items-center justify-center gap-6 px-8 pt-4 lg:flex-row"
       id="brands"
     >
       {brandslist.map((item) => (
