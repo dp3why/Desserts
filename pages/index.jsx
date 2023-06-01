@@ -19,7 +19,7 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Hero info={popularMovies.slice(6)} />
+      <Hero info={popularMovies.slice(5)} />
 
       <main
         className="relative min-h-screen 
@@ -62,7 +62,7 @@ export async function getServerSideProps(context) {
     top_ratedShowsRes,
   ] = await Promise.all([
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
     ),
     fetch(
       `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
