@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
 import Image from 'next/image'
@@ -24,6 +24,19 @@ const Movie = ({ recommendations, result }) => {
   )
   const router = useRouter()
   const { darkMode } = useContext(AppContext)
+
+  // player click outside
+  useEffect(() => {
+    document.addEventListener('click', handleClickOut, true)
+  }, [])
+  const refPlayer = useRef(null)
+
+  const handleClickOut = (e) => {
+    if (!refPlayer.current.contains(e.target)) {
+      console.log('clicked outside')
+      setShowPlayer(false)
+    }
+  }
 
   return (
     <div>
@@ -51,10 +64,10 @@ const Movie = ({ recommendations, result }) => {
 
         {/* === main information === */}
         <div
-          className="lg:inset-x-15 absolute inset-y-28
-                inset-x-4 z-50 space-y-6 md:inset-y-auto md:inset-x-12 md:bottom-10"
+          className="lg:inset-x-15 absolute inset-y-28 inset-x-4 z-50
+                mt-10 space-y-6 md:inset-y-auto md:inset-x-12 md:bottom-10"
         >
-          <h1 className="text-4xl font-bold sm:text-4xl md:text-6xl">
+          <h1 className="mt-10 text-4xl font-bold sm:text-4xl md:text-6xl">
             {result.title || result.original_name}
           </h1>
           <h3 className="text-xl">
@@ -63,12 +76,11 @@ const Movie = ({ recommendations, result }) => {
             )}
           </h3>
           <div className="flex items-center space-x-3 md:space-x-5">
-            {/* 
-                        ==== trailer button ===
-                        */}
+            {/*   ==== trailer button ===  */}
             <button
               className="flex items-center justify-center
-                        rounded bg-[#f9f9f9] py-2.5 px-6 text-xs text-black hover:bg-[#c6c6c6] 
+                        rounded bg-[#f9f9f9] py-2.5 px-6 text-xs text-black 
+                        hover:bg-[#c6c6c6] 
                         md:text-base"
               onClick={() => setShowPlayer(true)}
             >
@@ -83,9 +95,7 @@ const Movie = ({ recommendations, result }) => {
                 Trailer
               </span>
             </button>
-            {/* 
-                        ==== END trailer button ===
-                        */}
+            {/*   ==== END trailer button === */}
             <div
               className="rounded=full flex h-11 w-11 cursor-pointer items-center
                         justify-center border-2 border-white bg-black/60"
@@ -129,7 +139,7 @@ const Movie = ({ recommendations, result }) => {
         {/* == bg overlay == */}
         {showPlayer && (
           <div
-            className="inste-0 absolute z-50 
+            className="absolute inset-0 z-50 
                        h-full w-full bg-black opacity-50"
           ></div>
         )}
@@ -141,12 +151,15 @@ const Movie = ({ recommendations, result }) => {
                        md:inset-x-[13%] ${
                          showPlayer ? 'z-50 opacity-100' : 'opacity-0'
                        }`}
+          ref={refPlayer}
         >
           <div
-            className="flex items-center justify-between 
-                       bg-black p-3.5 text-[#f9f9f9] "
+            className="z-80 mt-10 flex items-center justify-between
+                       bg-black pt-3.5 text-[#f9f9f9] "
           >
-            <span className="font-semibold">Play Trailer</span>
+            <span className="ml-5 font-semibold text-neutral-500">
+              Playing Trailer
+            </span>
 
             <div
               className="flex h-8 
@@ -158,12 +171,17 @@ const Movie = ({ recommendations, result }) => {
             </div>
           </div>
           {/* === Player ===  */}
-          <div className="relative pt-[56.25%] ">
+          <div className="relative pt-[50.25%]  ">
             <ReactPlayer
               url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
               width="100%"
               height="100%"
-              style={{ position: 'absolute', top: '0', left: '0' }}
+              style={{
+                position: 'absolute',
+
+                top: '0',
+                left: '0',
+              }}
               controls={true}
               playing={showPlayer}
             />
