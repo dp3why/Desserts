@@ -14,6 +14,7 @@ import ReactPlayer from 'react-player'
 import { useRouter } from 'next/router'
 import SmImg from '../../components/SmImg'
 import { AppContext } from '../../pages/_app'
+import YouTube from 'react-youtube'
 
 const Movie = ({ recommendations, result }) => {
   const BASE_URL = 'https://image.tmdb.org/t/p/original/'
@@ -145,16 +146,16 @@ const Movie = ({ recommendations, result }) => {
 
         {/* === Outline of Player ===  */}
         <div
-          className={`absolute inset-x-[7%] top-3 overflow-hidden rounded 
-                       transition duration-1000 
+          className={`absolute inset-x-[7%] top-3  
+                       
                        md:inset-x-[13%] ${
                          showPlayer ? 'z-50 opacity-100' : 'opacity-0'
                        }`}
           ref={refPlayer}
         >
           <div
-            className="z-80 mt-10 flex items-center justify-between
-                       bg-black pt-3.5 text-[#f9f9f9] "
+            className="z-80 mt-12 flex items-center justify-between
+                       bg-black pt-1 text-[#f9f9f9] "
           >
             <span className="ml-5 font-semibold text-neutral-500">
               Playing Trailer
@@ -162,7 +163,7 @@ const Movie = ({ recommendations, result }) => {
 
             <div
               className="flex h-8 
-                                w-8 cursor-pointer items-center justify-center rounded-lg
+                                w-8 cursor-pointer items-center justify-center 
                                 opacity-50 hover:bg-[#0F0F0F] hover:opacity-75"
               onClick={() => setShowPlayer(false)}
             >
@@ -171,18 +172,13 @@ const Movie = ({ recommendations, result }) => {
           </div>
           {/* === Player ===  */}
           <div className="relative pt-[50.25%]  ">
-            <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
-              width="100%"
-              height="100%"
-              style={{
-                position: 'absolute',
-
-                top: '0',
-                left: '0',
+            <YouTube
+              videoId={result.videos?.results[index]?.key}
+              className="absolute top-0 left-0 h-full w-full"
+              opts={{
+                width: '100%',
+                height: '100%',
               }}
-              controls={true}
-              playing={showPlayer}
             />
           </div>
         </div>

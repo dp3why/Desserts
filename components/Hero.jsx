@@ -30,20 +30,21 @@ const Hero = ({ info }) => {
           <div key={item}>
             {/* ===== bg backdrop_path image ====== */}
             <div
-              className=" mt-0 flex h-[calc(100vh-0.5rem)] w-screen "
+              className=" mt-0 flex h-[calc(100vh-0.5rem)] w-screen  items-center"
               style={{
                 position: 'relative',
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
-                alignItems: 'center',
+
                 backgroundImage: `url(${BASE_URL}${item.backdrop_path})`,
               }}
             >
               {/* ===== Poster image ======= */}
               <div
-                className="z-60 absolute left-[8rem] right-auto top-[6rem] flex h-[20rem] 
-              w-[15rem] cursor-pointer flex-col items-center justify-center rounded-3xl
+                className="z-60 absolute left-[8rem] right-auto top-[6rem] flex 
+            
+              cursor-pointer flex-col items-center justify-center rounded-3xl
                "
                 onClick={() => router.push(`/movie/${item.id}`)}
               >
@@ -52,13 +53,14 @@ const Hero = ({ info }) => {
                   loading="lazy"
                   src={`${BASE_URL_SM}${item.poster_path}`}
                   alt={item.title}
-                  fill
-                  sizes="1"
+                  width={240}
+                  height={180}
                 />
               </div>
 
               <div
-                className=" absolute bottom-[4rem] left-1/2 right-1/2 flex h-[3rem] w-[3rem] animate-bounce items-center justify-center
+                className=" absolute bottom-[4rem] left-1/2 right-1/2 flex 
+                h-[3rem] w-[3rem] animate-bounce items-center justify-center
              rounded-full text-3xl backdrop-blur dark:bg-white/30 "
               >
                 <Scroll to="intropage" smooth={true}>

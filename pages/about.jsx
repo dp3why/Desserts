@@ -76,7 +76,7 @@ const About = () => {
         <div
           className="mt-5 grid
             max-w-4xl grid-cols-1 items-start 
-            justify-center gap-x-8 gap-y-10
+            justify-center gap-8 
            px-4 text-black dark:text-white md:grid-cols-2 md:px-8 lg:px-12 xl:px-16
             "
         >
