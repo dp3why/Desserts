@@ -30,8 +30,14 @@ const Header = () => {
   const auth = getAuth()
   const [user, loading] = useAuthState(auth)
   const handleSignOut = () => {
-    localStorage.removeItem('accessToken')
-    auth.signOut()
+    try {
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('idToken')
+
+      auth.signOut()
+    } catch (error) {
+      console.error(first)
+    }
   }
   return (
     <div

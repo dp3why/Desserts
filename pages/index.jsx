@@ -4,7 +4,9 @@ import Hero from '../components/Hero'
 import Brands from '../components/Brands'
 import MoviesCollection from '../components/MoviesCollection'
 import ShowsCollection from '../components/ShowsCollection'
-import React from 'react'
+import React, { useEffect } from 'react'
+import jwtDecode from 'jwt-decode'
+import { getAuth } from 'firebase/auth'
 
 const Home = ({
   popularMovies,
@@ -12,6 +14,31 @@ const Home = ({
   top_ratedMovies,
   top_ratedShows,
 }) => {
+  const auth = getAuth()
+  const checkTokenExpiration = () => {
+    const idToken = localStorage.getItem('idToken')
+    if (idToken) {
+      const decodedToken = jwtDecode(idToken)
+      const expirationTime = decodedToken.exp * 1000 // Convert expiration time to milliseconds
+
+      // Check if the token has expired
+      if (expirationTime < Date.now()) {
+        // Token has expired, sign out the user
+        localStorage.removeItem('idToken')
+        localStorage.removeItem('accessToken')
+        auth.signOut() // Sign out from Firebase authentication
+
+        // Redirect to the sign-in page or any other desired action
+        // router.push('/signin')
+      }
+    }
+  }
+
+  // Call the expiration check on component mount
+  useEffect(() => {
+    checkTokenExpiration()
+  }, [])
+
   return (
     <>
       <Head>

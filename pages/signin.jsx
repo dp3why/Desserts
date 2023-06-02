@@ -31,8 +31,10 @@ export default function SignIn({}) {
   const handleSignIn = async (provider) => {
     try {
       const result = await signInWithPopup(auth, provider)
-      const idToken = await result.user.getIdToken()
-
+      const idToken = await result.user.getIdToken(true, {
+        expiresIn: '1d',
+      })
+      localStorage.setItem('idToken', idToken)
       const response = await fetch(`${BACK}/login`, {
         method: 'POST',
         headers: {
@@ -55,7 +57,7 @@ export default function SignIn({}) {
         throw new Error('Failed to sign in')
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
   return (
