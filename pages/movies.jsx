@@ -10,7 +10,6 @@ const movies = ({
   actionMovies,
   romanceMovies,
 }) => {
-  console.log(romanceMovies)
   return (
     <div>
       <Head>

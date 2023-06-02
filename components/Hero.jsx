@@ -36,21 +36,19 @@ const Hero = ({ info }) => {
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
-
-                // justifyContent: 'center',
                 alignItems: 'center',
                 backgroundImage: `url(${BASE_URL}${item.backdrop_path})`,
               }}
             >
               {/* ===== Poster image ======= */}
               <div
-                className="absolute left-[8rem] right-auto top-[7rem] z-30 flex h-[25rem] 
+                className="z-60 absolute left-[8rem] right-auto top-[6rem] flex h-[20rem] 
               w-[15rem] cursor-pointer flex-col items-center justify-center rounded-3xl
                "
                 onClick={() => router.push(`/movie/${item.id}`)}
               >
                 <Image
-                  className="z-30 mt-3 rounded-xl drop-shadow-xl	"
+                  className="z-30 rounded-xl drop-shadow-xl	"
                   loading="lazy"
                   src={`${BASE_URL_SM}${item.poster_path}`}
                   alt={item.title}

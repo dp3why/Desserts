@@ -46,7 +46,7 @@ const Home = ({
              text-lg
              text-white"
       >
-        <p className="font-bold">DESSERTS@2023 All Rights Reserved.</p>
+        <p className="text-sm font-bold">DESSERTS@2023 All Rights Reserved.</p>
       </footer>
     </>
   )
@@ -62,16 +62,16 @@ export async function getServerSideProps(context) {
     top_ratedShowsRes,
   ] = await Promise.all([
     fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/on_the_air?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
   ])
 

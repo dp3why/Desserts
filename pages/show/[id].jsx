@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Header from '../../components/Header'
 import Image from 'next/image'
@@ -25,6 +25,17 @@ const Show = ({ recommendations, result }) => {
       element.type === 'Teaser'
   )
   const { darkMode } = useContext(AppContext)
+  // player click outside
+  useEffect(() => {
+    document.addEventListener('click', handleClickOut, true)
+  }, [])
+  const refPlayer = useRef(null)
+
+  const handleClickOut = (e) => {
+    if (refPlayer.current && !refPlayer.current.contains(e.target)) {
+      setShowPlayer(false)
+    }
+  }
 
   return (
     <div>
@@ -157,9 +168,10 @@ const Show = ({ recommendations, result }) => {
                        md:inset-x-[13%] ${
                          showPlayer ? 'z-50 opacity-100' : 'opacity-0'
                        }`}
+          ref={refPlayer}
         >
           <div
-            className="flex items-center justify-between 
+            className="mt-10 flex items-center justify-between 
                        bg-black p-3.5 text-[#f9f9f9] "
           >
             <span className="font-semibold">Play Trailer</span>
@@ -209,7 +221,7 @@ export async function getServerSideProps(context) {
 
   const [recommendationsRes, detailRes] = await Promise.all([
     fetch(
-      `${base}${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `${base}${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
       `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`

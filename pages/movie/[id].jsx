@@ -32,8 +32,7 @@ const Movie = ({ recommendations, result }) => {
   const refPlayer = useRef(null)
 
   const handleClickOut = (e) => {
-    if (!refPlayer.current.contains(e.target)) {
-      console.log('clicked outside')
+    if (refPlayer.current && !refPlayer.current.contains(e.target)) {
       setShowPlayer(false)
     }
   }
@@ -64,10 +63,10 @@ const Movie = ({ recommendations, result }) => {
 
         {/* === main information === */}
         <div
-          className="lg:inset-x-15 absolute inset-y-28 inset-x-4 z-50
-                mt-10 space-y-6 md:inset-y-auto md:inset-x-12 md:bottom-10"
+          className="absolute inset-y-28 inset-x-4 z-50 mt-12  
+                space-y-6 md:inset-y-20 md:inset-x-12 md:bottom-10 lg:inset-x-20"
         >
-          <h1 className="mt-10 text-4xl font-bold sm:text-4xl md:text-6xl">
+          <h1 className=" text-3xl font-bold sm:text-4xl md:text-5xl">
             {result.title || result.original_name}
           </h1>
           <h3 className="text-xl">
@@ -214,7 +213,7 @@ export async function getServerSideProps(context) {
 
   const [recommendationsRes, detailRes] = await Promise.all([
     fetch(
-      `${base}${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`
+      `${base}${id}/recommendations?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
       `${base}${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&append_to_response=videos`
