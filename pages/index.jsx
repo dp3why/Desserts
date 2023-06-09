@@ -82,6 +82,7 @@ const Home = ({
 export default Home
 
 export async function getServerSideProps(context) {
+  const base_url = 'https://api.themoviedb.org/3'
   const [
     popularMoviesRes,
     popularShowsRes,
@@ -89,16 +90,16 @@ export async function getServerSideProps(context) {
     top_ratedShowsRes,
   ] = await Promise.all([
     fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
+      `${base_url}/discover/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&with_genres=28&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/tv/on_the_air?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
+      `${base_url}/tv/on_the_air?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
+      `${base_url}/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
     fetch(
-      `https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
+      `${base_url}/tv/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&include_adult=false&language=en-US&page=1`
     ),
   ])
 

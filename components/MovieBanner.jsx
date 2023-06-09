@@ -54,7 +54,7 @@ const ShowBanner = ({ results }) => {
                   className="  rounded-md drop-shadow-lg"
                   loading="lazy"
                   width={300}
-                  height="auto"
+                  height={500}
                   src={`${BASE_URL_SM}${item.poster_path}`}
                   alt={item.title}
                 />
