@@ -46,7 +46,7 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Hero info={popularMovies.slice(5)} />
+      <Hero info={popularMovies.slice(0, 6)} />
 
       <main
         className="relative min-h-screen 
